@@ -1,46 +1,22 @@
-# 🧾 Travel Pay – Smart Group Travel Wallet
+# 🧳 Travel Pay – Smart Group Travel Wallet
 
-A PhonePe-like **smart travel expense manager** designed for groups.  
-One person pays → app auto-splits the amount → members get notified → reports show who owes what.
-
-🌍 Ideal for **trips, tours, parties, shared house rent, events**.
+A PhonePe-style **group expense manager** for trips, college tours, events, and roommates.  
+One person pays → app splits the amount → everyone’s share is tracked → settlement is shown.
 
 ---
 
-## ⭐ Project Badges
+## ⭐ Features
 
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
-![Tech](https://img.shields.io/badge/Tech-HTML%20CSS%20JS-blue)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-![Charts](https://img.shields.io/badge/Chart.js-Enabled-purple)
-
----
-
-## ✨ Features
-
-✔ Login & signup  
-✔ Create & manage groups  
-✔ Add & invite members  
-✔ Wallet + contribution tracking  
-✔ Auto split system  
-✔ Settlements & pending approvals  
-✔ Profile image upload  
-✔ Reports + charts  
-✔ Dark/light theme  
-✔ Local storage persistence  
-✔ PhonePe-like UI
-
----
-
-## 🖥️ Tech Stack
-
-| Part | Technology |
-|------|------------|
-| Frontend UI | HTML |
-| Styling | CSS with theme system |
-| Logic | JavaScript |
-| Charts | Chart.js |
-| Storage | LocalStorage |
+- Create / Login account  
+- Create travel groups  
+- Add and invite members  
+- Add contributions and payments  
+- Auto-split logic  
+- Wallet tracking  
+- Reports with charts  
+- Settlement system  
+- Dark mode  
+- LocalStorage data persistence  
 
 ---
 
@@ -48,108 +24,137 @@ One person pays → app auto-splits the amount → members get notified → repo
 
 ---
 
-## 🚀 Getting Started
+## 🚀 How To Use (Step-By-Step Procedure)
 
-### 🔹 Run Locally
-1. Download or clone this project  
-2. Open `index.html` in your browser  
-3. Start using Travel Pay — no backend required 🚀
-
-### 🔹 Deploy Online
-Works perfectly on:
-
-✔ GitHub Pages  
-✔ Netlify  
-✔ Firebase Hosting  
-✔ Vercel  
+### 🔹 Step 1 — Launch App  
+➡ Open `index.html` in any browser
 
 ---
 
-## 📌 Screens inside the App
-
-✔ Login Page  
-✔ Create Account Page  
-✔ Home Dashboard  
-✔ Wallet Card & Stats  
-✔ Create Group  
-✔ Add Members  
-✔ Contributions  
-✔ Payments  
-✔ Settlements  
-✔ Reports with Charts  
-✔ Profile Page  
-✔ Dark Mode UI  
+### 🔹 Step 2 — Create Account  
+- Enter your name  
+- Enter phone number  
+- Upload profile image (optional)  
+✔ App saves your profile
 
 ---
 
-## 🧠 System Logic Overview
-
-### 🔐 Authentication & Account
-- User profile stored in LocalStorage
-- Phone based login
-- Profile pic upload & persistence
-
-### 💰 Expense Engine
-- Host pays → app splits
-- Contributions tracked per member
-- Pending approvals shown
-- Settlement workflow
-
-### 📊 Analytics
-- Chart.js integration
-- Summary cards
-- Per-user expense & share visualization
+### 🔹 Step 3 — Login  
+- Enter registered phone number  
+✔ App restores your dashboard  
+✔ State auto-loads from LocalStorage
 
 ---
 
-## 📷 Screenshots (Add Images Later)
-
-📌 `Login Screen`  
-📌 `Dashboard Wallet View`  
-📌 `Group Creation UI`  
-📌 `Expense + Split UI`  
-📌 `Reports / Chart UI`
-
-> Replace with screenshots once deployed.
+### 🔹 Step 4 — Create Group  
+- Go to **Create Group**  
+- Enter group name (e.g., “Goa Trip 2025”)  
+- Select number of members  
+- Enter their names and phone numbers  
+✔ Host becomes admin
 
 ---
 
-## 🔮 Future Enhancements
-
-- Cloud backend (Firebase / Supabase / Node.js)
-- Realtime sync
-- Notification system
-- QR-based group join
-- PDF exports for settlements
-- Multiple groups per user
-- PhonePe UPI bill settlement integration
+### 🔹 Step 5 — Add / Invite Members  
+- Go to **Add Members**  
+- Send invitations  
+- Track pending / approved members  
 
 ---
 
-## 🤝 Contributing
-
-1. Fork this repo  
-2. Add your changes  
-3. Create a Pull Request  
-
-All constructive improvements are welcome!
+### 🔹 Step 6 — Add Contribution (Optional)  
+- Select a member  
+- Enter amount contributed  
+✔ Wallet updates
 
 ---
 
-## 🧑‍💻 Author
+### 🔹 Step 7 — Add Expenses  
+- Go to **Make Payment**  
+- Enter:
+  - Expense title (Food / Hotel / Fuel / Tickets)
+  - Amount paid
+  - Person who paid  
+✔ App auto splits the bill  
+✔ Member share updates automatically  
 
-👨‍💻 **Manoj B**  
-Student Developer passionate about IoT, AI, Embedded, Web & Smart Systems.
+---
+
+### 🔹 Step 8 — View Reports  
+- Go to **Reports**  
+- View:
+  - Total contribution  
+  - Total expenses  
+  - Per person share  
+- Visual summary generated via charts  
+
+---
+
+### 🔹 Step 9 — End Trip & Settlement  
+- Host clicks **End Trip**  
+- App shows pending dues  
+- Members clear their share  
+- Host closes group  
+
+---
+
+---
+
+## 📌 Example Scenario
+
+**Trip: Goa Tour | 4 Friends**
+
+1. A pays hotel ₹4000 → split ₹1000 each  
+2. B pays food ₹2000 → split ₹500 each  
+✔ Reports show who owes how much  
+✔ Settlement screen makes it clear
+
+---
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer | Technology |
+|------|------------|
+| UI | HTML |
+| Styling | CSS |
+| App Logic | JavaScript |
+| Charts | Chart.js |
+| Storage | LocalStorage |
+
+---
+
+---
+
+## 🔮 Future Scope
+
+- Firebase backend  
+- SMS / WhatsApp invite  
+- QR join group  
+- Real money transfer settlement  
+- Export bills as PDF  
+
+---
+
+## 🤝 Contribution Guide
+
+1. Fork repo  
+2. Modify code  
+3. Create pull request  
+
+---
+
+## 👨‍💻 Author
+
+**Manoj B** — Student Developer interested in IoT, AI, Embedded, Healthcare and Smart Apps.
 
 ---
 
 ## 📜 License
 
-MIT License – feel free to learn, modify, improve and share 🚀
-
----
-
-⭐ **If you like this project, don't forget to Star ⭐ the repository!**
+MIT License — free to use, modify, improve.  
+⭐ If the project helped you, please star the repo!
 
 
 
