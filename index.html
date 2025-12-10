@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Travel Pay - Smart Travel Wallet</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧳</text></svg>">
+</head>
+<body>
+  <div class="main-container">
+
+    <!-- Header - UPDATED: Removed notification bell -->
+    <header class="app-header hidden" id="appHeader">
+      <div class="left-group">
+        <button class="menu-toggle" id="menuToggle" title="Menu" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <!-- Page Title in Header -->
+        <div class="page-title-header" id="pageTitle">Travel Wallet</div>
+      </div>
+      <div class="right-group">
+        <!-- REMOVED notification bell button -->
+      </div>
+    </header>
+
+    <!-- Sidebar Drawer -->
+    <aside class="drawer hidden" id="drawer" aria-hidden="true" aria-label="Navigation menu">
+      <div class="drawer-top">
+        <img id="drawerProfileImage" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzk5OTk5OSI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgM2MyLjIxIDAgNCAxLjc5IDQgNHMtMS43OSA0LTQgNC00LTEuNzktNC00IDEuNzktNCA0LTR6bTAgMTcuMDJjLTMuMzMyIDAtNi4yOC0xLjcxLTgtNi4wMiAyLjA1LTMuMTYgNS4yOC00IDgtNHM1Ljk1Ljg0IDggNGMtMS43MiA0LjMxLTQuNjcgNi4wMi04IDYuMDJ6Ii8+PC9zdmc+" alt="Profile" class="drawer-avatar">
+        <div class="drawer-name" id="drawerHostName">Traveler</div>
+      </div>
+      <nav class="drawer-nav">
+        <button class="drawer-item" data-target="home-page" aria-label="Home">
+          <i class="fas fa-home"></i> Home
+        </button>
+        <button class="drawer-item" data-target="profile-page" aria-label="Profile">
+          <i class="fas fa-user"></i> Profile
+        </button>
+        <button class="drawer-item" data-target="create-group-page" aria-label="Create Group">
+          <i class="fas fa-users"></i> Create Group
+        </button>
+        <button class="drawer-item" data-target="add-members-page" aria-label="Add Members">
+          <i class="fas fa-user-plus"></i> Add Members
+        </button>
+        <button class="drawer-item" data-target="pay-page" aria-label="Make Payment">
+          <i class="fas fa-money-bill-wave"></i> Make Payment
+        </button>
+        <button class="drawer-item" data-target="reports-page" aria-label="Reports">
+          <i class="fas fa-chart-line"></i> Reports
+        </button>
+        <button class="drawer-item" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i> <span id="themeText">Dark Mode</span>
+        </button>
+        <button class="drawer-item" id="helpBtn" aria-label="Help">
+          <i class="fas fa-question-circle"></i> Help & Support
+        </button>
+      </nav>
+      <div class="drawer-footer">
+        <div class="app-version">Travel Pay v1.0</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content" id="mainContent">
+      
+      <!-- Login Page -->
+      <section id="login-page" class="page active">
+        <div class="card form-card animated-card">
+          <div class="app-logo">
+            <div class="logo-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <h1>Travel Pay</h1>
+            <p class="tagline">Smart Travel Wallet for Groups</p>
+          </div>
+          <p class="login-sub">Login to your account</p>
+          <div class="form-group">
+            <label for="inputLoginPhone">Phone Number</label>
+            <div class="input-with-icon">
+              <i class="fas fa-phone"></i>
+              <input id="inputLoginPhone" type="tel" placeholder="+91 9876543210" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="primary-btn" id="btnLogin">
+              <i class="fas fa-sign-in-alt"></i> Log In
+            </button>
+          </div>
+          <div class="login-link">
+            Don't have an account? <a href="#" data-target="create-account-page">Sign up</a>
+          </div>
+          <div class="demo-credentials">
+            <p class="demo-title"><i class="fas fa-info-circle"></i> Demo Credentials:</p>
+            <p><i class="fas fa-user-check"></i> Host: +91 9876543210</p>
+            <p><i class="fas fa-user"></i> Member: +91 9876543211</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Create Account Page -->
+      <section id="create-account-page" class="page">
+        <div class="card form-card animated-card">
+          <h2 class="page-title">Create Account</h2>
+          <div class="profile-image-upload">
+            <div class="image-container">
+              <img id="accountProfileImage" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzk5OTk5OSI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgM2MyLjIxIDAgNCAxLjc5IDQgNHMtMS43OSA0LTQgNC00LTEuNzktNC00IDEuNzktNCA0LTR6bTAgMTcuMDJjLTMuMzMzIDAtNi4yOC0xLjc5LTgtNi4wMiAyLjA1LTMuMTYgNS4yOC00IDgtNHM1Ljk1Ljg0IDggNGMtMS43MiA0LjMxLTQuNjcgNi4wMi04IDYuMDJ6Ii8+PC9zdmc+" alt="Profile" class="profile-img-large">
+              <input type="file" id="profileImageUpload" accept="image/*" class="hidden" />
+              <button class="image-upload-btn" id="triggerImageUpload" aria-label="Upload profile picture">
+                <i class="fas fa-camera"></i>
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAccountName">Your Name</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user"></i>
+              <input id="inputAccountName" type="text" placeholder="e.g. Manoj Kumar" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAccountPhone">Phone Number</label>
+            <div class="input-with-icon">
+              <i class="fas fa-phone"></i>
+              <input id="inputAccountPhone" type="tel" placeholder="+91 9876543210" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="primary-btn" id="btnCreateAccount">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </button>
+            <button class="secondary-btn" data-target="login-page">
+              <i class="fas fa-arrow-left"></i> Back to Login
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Home Page -->
+      <section id="home-page" class="page">
+        <!-- Wallet Card -->
+        <div class="card wallet-card animated-card">
+          <div class="wallet-info">
+            <div class="wallet-header">
+              <div class="wallet-label">
+                <i class="fas fa-wallet"></i> Travel Group Wallet
+              </div>
+              <div class="wallet-status" id="walletStatus">
+                <i class="fas fa-circle"></i> <span id="walletStatusText">Active</span>
+              </div>
+            </div>
+            <div class="wallet-balance">₹ <span id="currentBalance">0.00</span></div>
+            <div class="wallet-sub" id="groupNameDisplay">No active group</div>
+            <div class="wallet-stats">
+              <div class="stat-item">
+                <span class="stat-label">Members</span>
+                <span class="stat-value" id="membersCount">0</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Transactions</span>
+                <span class="stat-value" id="transactionsCount">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="wallet-actions">
+            <button class="wallet-action-btn primary" data-target="create-group-page" title="Create new group">
+              <i class="fas fa-plus"></i> Create
+            </button>
+            <button class="wallet-action-btn secondary" data-target="add-members-page" title="Manage members">
+              <i class="fas fa-users"></i> Members
+            </button>
+            <button class="wallet-action-btn danger" id="btnEndTrip" title="End Trip (host only)">
+              <i class="fas fa-flag-checkered"></i> End Trip
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="section-header">
+          <h3 class="section-title">Quick Actions</h3>
+          <button class="see-all-btn" data-target="reports-page">See All</button>
+        </div>
+        <div class="quick-actions-grid">
+          <div class="action-card" data-target="create-group-page" role="button" tabindex="0">
+            <div class="action-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <span class="action-title">Create Group</span>
+          </div>
+          <div class="action-card" data-target="add-members-page" role="button" tabindex="0">
+            <div class="action-icon">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <span class="action-title">Add Members</span>
+          </div>
+          <div class="action-card" data-target="pay-page" role="button" tabindex="0">
+            <div class="action-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <span class="action-title">Pay</span>
+          </div>
+          <div class="action-card" data-target="reports-page" role="button" tabindex="0">
+            <div class="action-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <span class="action-title">Reports</span>
+          </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="section-header">
+          <h3 class="section-title">Recent Transactions</h3>
+          <button class="see-all-btn" id="refreshTransactions">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+        </div>
+        <div class="card transaction-card">
+          <ul id="transactions-list" class="transactions-list">
+            <li class="transaction-empty">
+              <i class="fas fa-receipt"></i>
+              <p>No transactions yet.</p>
+              <small>Start by creating a group or making a payment</small>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pending Approvals -->
+        <div class="section-header" id="settlementsSection" style="display: none;">
+          <h3 class="section-title">Pending Approvals</h3>
+        </div>
+        <div class="card" id="pendingApprovalsCard" style="display: none;">
+          <div class="pending-approvals" id="pendingApprovalsList">
+            <!-- Dynamic content -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Create Group Page -->
+      <section id="create-group-page" class="page">
+        <div class="card form-card animated-card">
+          <h2 class="page-title">
+            <i class="fas fa-users"></i> Create New Group
+          </h2>
+          <p class="page-subtitle">You'll be the host of this group</p>
+          
+          <div class="form-group">
+            <label for="inputGroupName">Group Name</label>
+            <div class="input-with-icon">
+              <i class="fas fa-tag"></i>
+              <input id="inputGroupName" type="text" placeholder="e.g. Goa Trip 2024" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputMemberCount">How many members (excluding host)?</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user-friends"></i>
+              <input id="inputMemberCount" type="number" min="0" max="20" placeholder="e.g. 3" />
+            </div>
+            <small class="input-hint">Maximum 20 members per group</small>
+          </div>
+
+          <div id="dynamicMembersArea" class="dynamic-members-area"></div>
+
+          <div class="form-actions">
+            <button class="primary-btn" id="btnCreateGroup">
+              <i class="fas fa-check-circle"></i> Create Group
+            </button>
+            <button class="secondary-btn" data-target="home-page">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Add Members Page -->
+      <section id="add-members-page" class="page">
+        <div class="card form-card animated-card">
+          <h2 class="page-title">
+            <i class="fas fa-user-plus"></i> Invitations & Members
+          </h2>
+
+          <div class="invite-section">
+            <h4 class="section-subtitle">Send Invitation</h4>
+            <div class="invite-form">
+              <div class="form-row">
+                <div class="input-with-icon">
+                  <i class="fas fa-user"></i>
+                  <input type="text" id="inviteName" placeholder="Member Name" />
+                </div>
+                <div class="input-with-icon">
+                  <i class="fas fa-phone"></i>
+                  <input type="tel" id="invitePhone" placeholder="Phone Number" />
+                </div>
+                <button class="primary-btn small" id="btnSendInvite">
+                  <i class="fas fa-paper-plane"></i> Invite
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="pending">Pending Invitations</button>
+            <button class="tab-btn" data-tab="members">Group Members</button>
+          </div>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="pendingTab">
+              <ul id="pendingInvitesList" class="members-list">
+                <!-- Dynamic content -->
+              </ul>
+            </div>
+            <div class="tab-pane" id="membersTab">
+              <ul id="membersList" class="members-list">
+                <!-- Dynamic content -->
+              </ul>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="secondary-btn" data-target="home-page">
+              <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+          </div>
+        </div>
+
+        <!-- Contributions Section -->
+        <div class="card form-card animated-card" style="margin-top: 20px;">
+          <h4 class="section-subtitle">
+            <i class="fas fa-money-bill-alt"></i> Add Contributions
+          </h4>
+          <div class="form-group">
+            <label for="contribName">Member Name</label>
+            <select id="contribName" class="select-input">
+              <option value="">Select a member</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="contribAmount">Amount (₹)</label>
+            <div class="input-with-icon">
+              <i class="fas fa-rupee-sign"></i>
+              <input id="contribAmount" type="number" min="1" placeholder="Enter amount" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="primary-btn" id="btnAddContribution">
+              <i class="fas fa-plus-circle"></i> Add Contribution
+            </button>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Pay Page -->
+      <section id="pay-page" class="page">
+        <div class="card form-card animated-card">
+          <h2 class="page-title">
+            <i class="fas fa-money-check-alt"></i> Make a Payment
+          </h2>
+          <p class="page-subtitle">Host can make payments on behalf of the group</p>
+
+          <div class="form-group">
+            <label for="inputExpenseTitle">Expense Title</label>
+            <div class="input-with-icon">
+              <i class="fas fa-receipt"></i>
+              <input id="inputExpenseTitle" type="text" placeholder="e.g. Dinner at XYZ Restaurant" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputExpenseAmount">Amount (₹)</label>
+            <div class="input-with-icon">
+              <i class="fas fa-rupee-sign"></i>
+              <input id="inputExpenseAmount" type="number" min="0" step="0.01" placeholder="0.00" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="selectPayer">Payer (Host starts)</label>
+            <select id="selectPayer" class="select-input">
+              <option value="">Select payer</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="expenseCategory">Category</label>
+            <select id="expenseCategory" class="select-input">
+              <option value="food">🍕 Food & Dining</option>
+              <option value="transport">🚗 Transportation</option>
+              <option value="accommodation">🏨 Accommodation</option>
+              <option value="activities">🎭 Activities</option>
+              <option value="shopping">🛍️ Shopping</option>
+              <option value="other">📦 Other</option>
+            </select>
+          </div>
+
+          <div class="info-box">
+            <i class="fas fa-info-circle"></i>
+            <p>Consensus required: Members must approve this expense.</p>
+          </div>
+
+          <div class="form-actions">
+            <button class="primary-btn" id="btnPay">
+              <i class="fas fa-paper-plane"></i> Submit for Approval
+            </button>
+            <button class="secondary-btn" data-target="home-page">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        </div>
+
+        <!-- Recent Expenses -->
+        <div class="card" style="margin-top: 20px;">
+          <h4 class="section-subtitle">Recent Expenses</h4>
+          <ul id="recentExpensesList" class="expenses-list">
+            <!-- Dynamic content -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- Reports Page -->
+      <section id="reports-page" class="page">
+        <div class="card form-card animated-card">
+          <h2 class="page-title">
+            <i class="fas fa-chart-bar"></i> Reports & Analytics
+          </h2>
+
+          <!-- Summary Cards -->
+          <div class="summary-cards">
+            <div class="summary-card income">
+              <div class="summary-icon">
+                <i class="fas fa-money-bill-wave"></i>
+              </div>
+              <div class="summary-content">
+                <div class="summary-label">Total Contributions</div>
+                <div class="summary-value" id="totalContributions">₹0.00</div>
+              </div>
+            </div>
+            <div class="summary-card expense">
+              <div class="summary-icon">
+                <i class="fas fa-receipt"></i>
+              </div>
+              <div class="summary-content">
+                <div class="summary-label">Total Expenses</div>
+                <div class="summary-value" id="totalExpenses">₹0.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div class="charts-container">
+            <div class="chart-card">
+              <h4 class="chart-title">Expense Distribution</h4>
+              <div class="chart-wrapper">
+                <canvas id="expenseChart"></canvas>
+              </div>
+            </div>
+            <div class="chart-card">
+              <h4 class="chart-title">Member Contributions</h4>
+              <div class="chart-wrapper">
+                <canvas id="contributionChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Report -->
+          <div class="report-section">
+            <h4 class="section-subtitle">Detailed Breakdown</h4>
+            <div id="reportBody" class="report-body">
+              <div class="empty-state">
+                <i class="fas fa-chart-pie"></i>
+                <p>No data yet. Reports will appear after transactions.</p>
+                <small>Create a group and start adding expenses</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="secondary-btn" data-target="home-page">
+              <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+            <button class="primary-btn outline" id="btnExportReport">
+              <i class="fas fa-download"></i> Export Report
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile Page -->
+      <section id="profile-page" class="page">
+        <div class="card form-card animated-card">
+          <h2 class="page-title">
+            <i class="fas fa-user-circle"></i> Profile
+          </h2>
+
+          <div class="profile-image-upload">
+            <div class="image-container">
+              <img id="profilePageImage" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzk5OTk5OSI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgM2MyLjIxIDAgNCAxLjc5IDQgNHMtMS43OSA0LTQgNC00LTEuNzktNC00IDEuNzktNCA0LTR6bTAgMTcuMDJjLTMuMzMzIDAtNi4yOC0xLjc5LTgtNi4wMiAyLjA1LTMuMTYgNS4yOC00IDgtNHM1Ljk1Ljg0IDggNGMtMS43MiA0LjMxLTQuNjcgNi4wMi04IDYuMDJ6Ii8+PC9zdmc+" alt="Profile" class="profile-img-large">
+              <input type="file" id="profilePageImageUpload" accept="image/*" class="hidden" />
+              <button class="image-upload-btn" id="triggerProfileImageUpload" aria-label="Change profile picture">
+                <i class="fas fa-camera"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="profileNameInput">Full Name</label>
+            <div class="input-with-icon">
+              <i class="fas fa-user"></i>
+              <input id="profileNameInput" type="text" placeholder="Your Name" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="profilePhoneInput">Phone Number</label>
+            <div class="input-with-icon">
+              <i class="fas fa-phone"></i>
+              <input id="profilePhoneInput" type="tel" placeholder="+91 9876543210" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="profileEmail">Email Address (Optional)</label>
+            <div class="input-with-icon">
+              <i class="fas fa-envelope"></i>
+              <input id="profileEmail" type="email" placeholder="your@email.com" />
+            </div>
+          </div>
+
+          <div class="profile-stats">
+            <div class="stat-item">
+              <span class="stat-label">Groups Created</span>
+              <span class="stat-value" id="groupsCreated">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Total Spent</span>
+              <span class="stat-value" id="totalSpent">₹0.00</span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="primary-btn" id="btnUpdateProfile">
+              <i class="fas fa-save"></i> Update Profile
+            </button>
+            <button class="secondary-btn" data-target="home-page">
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button class="danger-btn" id="btnLogout">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav hidden" id="bottomNav" aria-label="Main navigation">
+      <button class="nav-item active" data-target="home-page" aria-label="Home">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-target="reports-page" aria-label="Reports">
+        <i class="fas fa-chart-bar"></i>
+        <span>Reports</span>
+      </button>
+      <button class="nav-item pay-center" data-target="pay-page" aria-label="Pay">
+        <i class="fas fa-plus-circle"></i>
+        <span>Pay</span>
+      </button>
+      <button class="nav-item" data-target="create-group-page" aria-label="Group">
+        <i class="fas fa-users"></i>
+        <span>Group</span>
+      </button>
+      <button class="nav-item" data-target="profile-page" aria-label="Profile">
+        <i class="fas fa-user"></i>
+        <span>Profile</span>
+      </button>
+    </nav>
+
+    <!-- Consensus Modal -->
+    <div id="consensusModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-overlay"></div>
+      <div class="modal-card animated-card">
+        <div class="modal-header">
+          <h4 id="modalTitle">Approve Expense</h4>
+          <button class="modal-close" id="closeConsensusModal" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="modalDesc" class="modal-description"></p>
+          <div class="approvers-section">
+            <h5>Members Approval Required</h5>
+            <div id="approversList" class="approvers-list">
+              <!-- Dynamic content -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="primary-btn" id="btnFinalize">
+              <i class="fas fa-check-circle"></i> Finalize & Process
+            </button>
+            <button class="secondary-btn" id="btnCancelModal">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settlement Modal -->
+    <div id="settleModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-overlay"></div>
+      <div class="modal-card animated-card">
+        <div class="modal-header">
+          <h4>Trip Settlement Report</h4>
+          <button class="modal-close" id="closeSettleModal" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="settlementBody" class="settlement-body">
+            <!-- Dynamic content -->
+          </div>
+          <div class="modal-footer">
+            <button class="primary-btn" id="btnCloseSettle">
+              <i class="fas fa-check"></i> Close
+            </button>
+            <button class="secondary-btn" id="btnPrintSettlement">
+              <i class="fas fa-print"></i> Print Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notificationToast" class="notification-toast hidden" role="alert">
+      <div class="toast-content">
+        <i class="toast-icon fas fa-check-circle"></i>
+        <div class="toast-message">Operation successful!</div>
+      </div>
+      <button class="toast-close" aria-label="Close notification">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
